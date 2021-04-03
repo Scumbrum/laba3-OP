@@ -8,10 +8,10 @@
     </head>
     <body>
     <%!
-        double a=0, aEnd=0, aStep=0;
-        double b=0, bEnd=0, bStep=0;
-        double c=0, cEnd=0, cStep=0;
-        double d=0, dEnd=0, dStep=0;
+        double a=1, aEnd=2, aStep=1;
+        double b=1, bEnd=2, bStep=1;
+        double c=1, cEnd=2, cStep=1;
+        double d=1, dEnd=2, dStep=1;
         String task="";
         ArrayList<CountResult> result;
     %>
@@ -148,5 +148,13 @@
             step<input type="text" name="dStep" value="<%=dStep%>" /><br>
             <input type="submit" value="Solve task"/>
         </form>
+        <br>
+        <% if(aStep == 0 || bStep == 0 || cStep == 0 || dStep == 0){  %>
+            <h1>Step cannot be 0!</h1>
+        <% } %>
+        <br>
+        <% if(request.getAttribute("isTaskNumberEntered") == "false"){  %>
+        <h1>Dont forget to choose task number!</h1>
+        <% } %>
     </body>
 </html>

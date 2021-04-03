@@ -44,26 +44,32 @@ public class TaskSolver extends HttpServlet {
             request.setAttribute("cStep",cStep);
             request.setAttribute("dStep",dStep);
 
-            String taskNumber = request.getParameter("taskNumber");
-            request.setAttribute("taskNumber", taskNumber);
+            if(request.getParameter("taskNumber") != null) {
+                request.setAttribute("isTaskNumberEntered", "true");
+                String taskNumber = request.getParameter("taskNumber");
+                request.setAttribute("taskNumber", taskNumber);
 
-            Counter counter = new Counter(taskNumber);
-            ArrayList<CountResult> result = new ArrayList<>();
-
-            for(double a1 = a; a1 <= aEnd; a1 += aStep){
-                for(double b1 = b; b1 <= bEnd; b1 += bStep){
-                    for(double c1 = c; c1 <= cEnd; c1 += cStep){
-                        for(double d1 = d; d1 <= dEnd; d1 += dStep){
-                            result.add(new CountResult(a1, b1, c1, d1, counter.count(a1, b1, c1, d1)));
+                if(aStep != 0 && bStep != 0 && cStep != 0 && dStep != 0) {
+                    Counter counter = new Counter(taskNumber);
+                    ArrayList<CountResult> result = new ArrayList<>();
+                    for (double a1 = a; a1 <= aEnd; a1 += aStep) {
+                        for (double b1 = b; b1 <= bEnd; b1 += bStep) {
+                            for (double c1 = c; c1 <= cEnd; c1 += cStep) {
+                                for (double d1 = d; d1 <= dEnd; d1 += dStep) {
+                                    result.add(new CountResult(a1, b1, c1, d1, counter.count(a1, b1, c1, d1)));
+                                }
+                            }
                         }
                     }
+                    request.setAttribute("result", result);
                 }
+            } else {
+                request.setAttribute("isTaskNumberEntered", "false");
             }
-            request.setAttribute("result", result);
-            RequestDispatcher rd =request.getRequestDispatcher("index.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request,response);
         } catch (NumberFormatException e){
-        response.sendError(400);
+            response.sendError(400);
         }
 
     }
