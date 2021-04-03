@@ -9,7 +9,7 @@ public class Counter {
         double result;
         switch (this.taskNumber){
             case "7":
-                result = Math.pow(4*Math.cosh(Math.sqrt(a/b))+3*Math.acos(c),d);
+                result = Math.pow(4*Math.cosh(Math.sqrt(a/b))+3*Math.acos(d),c);
                 break;
             case "8":
                 result = 5*a/Math.sin(a)+Math.sqrt(Math.tanh(Math.abs(b)*c)/Math.log(d));
