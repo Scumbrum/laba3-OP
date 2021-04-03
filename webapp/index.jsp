@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="forms.*" %>
+<%@ page import="java.util.ArrayList" %>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -6,30 +8,56 @@
     </head>
     <body>
     <%!
-        double a=0;
-        double b=0;
-        double c=0;
-        double d=0;
+        double a=0, aEnd=0, aStep=0;
+        double b=0, bEnd=0, bStep=0;
+        double c=0, cEnd=0, cStep=0;
+        double d=0, dEnd=0, dStep=0;
         String task="";
+        ArrayList<CountResult> result;
     %>
     <%
         if(request.getAttribute("a")!=null) {
             this.a = (Double) request.getAttribute("a");
         }
+        if(request.getAttribute("aEnd")!=null) {
+            this.aEnd = (Double) request.getAttribute("aEnd");
+        }
+        if(request.getAttribute("aStep")!=null) {
+            this.aStep = (Double) request.getAttribute("aStep");
+        }
         if(request.getAttribute("b")!=null) {
             this.b = (Double) request.getAttribute("b");
+        }
+        if(request.getAttribute("bEnd")!=null) {
+            this.bEnd = (Double) request.getAttribute("bEnd");
+        }
+        if(request.getAttribute("bStep")!=null) {
+            this.bStep = (Double) request.getAttribute("bStep");
         }
         if(request.getAttribute("c")!=null) {
             this.c = (Double) request.getAttribute("c");
         }
+        if(request.getAttribute("cEnd")!=null) {
+            this.cEnd = (Double) request.getAttribute("cEnd");
+        }
+        if(request.getAttribute("cStep")!=null) {
+            this.cStep = (Double) request.getAttribute("cStep");
+        }
         if(request.getAttribute("d")!=null) {
             this.d=(Double) request.getAttribute("d");
+        }
+        if(request.getAttribute("dEnd")!=null) {
+            this.dEnd = (Double) request.getAttribute("dEnd");
+        }
+        if(request.getAttribute("dStep")!=null) {
+            this.dStep = (Double) request.getAttribute("dStep");
         }
         if(request.getParameter("taskNumber")!=null){
             this.task=(String) request.getAttribute("taskNumber");
         }
     %>
     <% if(request.getAttribute("result")!=null){
+        result = (ArrayList<CountResult>) request.getAttribute("result");
     %>
     <table cellpadding="4" border="2">
         <tr>
@@ -39,20 +67,22 @@
             <td>C</td>
             <td>D</td>
         </tr>
+        <% for(CountResult result1 : result) {%>
         <tr>
-            <td><%=request.getAttribute("result")%></td>
-            <td><%=this.a%></td>
-            <td><%=this.b%></td>
-            <td><%=this.c%></td>
-            <td><%=this.d%></td>
+            <td><%=result1.getResult()%></td>
+            <td><%=result1.getA()%></td>
+            <td><%=result1.getB()%></td>
+            <td><%=result1.getC()%></td>
+            <td><%=result1.getD()%></td>
         </tr>
+        <% } %>
     </table>
     <hr>
     <br>
     <% }
     %>
     <br>
-        <form action="TaskSolver" method="get">
+        <form action="TaskSolver" method="post">
             <table>
                 <tr>
                     <td>
@@ -104,10 +134,18 @@
                     </td>
                 </tr>
             </table>
-            a = <input type="text" name="a" value="<%=a%>" /> <br>
-            b = <input type="text" name="b" value="<%=b%>" /> <br>
-            c = <input type="text" name="c" value="<%=c%>" /> <br>
-            d = <input type="text" name="d" value="<%=d%>" /> <br>
+            a: from<input type="text" name="a" value="<%=a%>" />
+                to<input type="text" name="aEnd" value="<%=aEnd%>" />
+                step<input type="text" name="aStep" value="<%=aStep%>" /><br>
+            b: from<input type="text" name="b" value="<%=b%>" />
+            to<input type="text" name="bEnd" value="<%=bEnd%>" />
+            step<input type="text" name="bStep" value="<%=bStep%>" /><br>
+            c: from<input type="text" name="c" value="<%=c%>" />
+            to<input type="text" name="cEnd" value="<%=cEnd%>" />
+            step<input type="text" name="cStep" value="<%=cStep%>" /><br>
+            d: from<input type="text" name="d" value="<%=d%>" />
+            to<input type="text" name="dEnd" value="<%=dEnd%>" />
+            step<input type="text" name="dStep" value="<%=dStep%>" /><br>
             <input type="submit" value="Solve task"/>
         </form>
     </body>
