@@ -17,15 +17,42 @@
         ArrayList<CountResult> result;
     %>
     <%
-        Enumeration<String> attributeNames = request.getAttributeNames();
-        while(attributeNames.hasMoreElements()){
-            Object attrName = attributeNames.nextElement();
-
-            if (request.getAttribute(String.valueOf(attrName)) != null){
-                Object item = request.getAttribute((String) attrName);
-            }
+        if(request.getAttribute("a")!=null) {
+            this.a = (Double) request.getAttribute("a");
         }
-
+        if(request.getAttribute("aEnd")!=null) {
+            this.aEnd = (Double) request.getAttribute("aEnd");
+        }
+        if(request.getAttribute("aStep")!=null) {
+            this.aStep = (Double) request.getAttribute("aStep");
+        }
+        if(request.getAttribute("b")!=null) {
+            this.b = (Double) request.getAttribute("b");
+        }
+        if(request.getAttribute("bEnd")!=null) {
+            this.bEnd = (Double) request.getAttribute("bEnd");
+        }
+        if(request.getAttribute("bStep")!=null) {
+            this.bStep = (Double) request.getAttribute("bStep");
+        }
+        if(request.getAttribute("c")!=null) {
+            this.c = (Double) request.getAttribute("c");
+        }
+        if(request.getAttribute("cEnd")!=null) {
+            this.cEnd = (Double) request.getAttribute("cEnd");
+        }
+        if(request.getAttribute("cStep")!=null) {
+            this.cStep = (Double) request.getAttribute("cStep");
+        }
+        if(request.getAttribute("d")!=null) {
+            this.d=(Double) request.getAttribute("d");
+        }
+        if(request.getAttribute("dEnd")!=null) {
+            this.dEnd = (Double) request.getAttribute("dEnd");
+        }
+        if(request.getAttribute("dStep")!=null) {
+            this.dStep = (Double) request.getAttribute("dStep");
+        }
         if(request.getParameter("taskNumber")!=null){
             this.task=(String) request.getAttribute("taskNumber");
         } %>
